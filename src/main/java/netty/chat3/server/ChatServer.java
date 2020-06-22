@@ -1,4 +1,4 @@
-package netty.chat2;
+package netty.chat3.server;
 
 import java.nio.charset.Charset;
 
@@ -12,6 +12,9 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.LineBasedFrameDecoder;
+import netty.chat3.MessageDecoder;
+import netty.chat3.MessageEncoder;
+import netty.chat3.MessageStoreHandler;
 
 public class ChatServer {
 	public void start(int port) {
@@ -26,9 +29,9 @@ public class ChatServer {
 
 					@Override
 					protected void initChannel(Channel ch) throws Exception {
-						ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
 						ch.pipeline().addLast(new MessageDecoder());
 						ch.pipeline().addLast(new MessageEncoder());
+						ch.pipeline().addLast(new MessageStoreHandler());
 						ch.pipeline().addLast(new ChatHandler());
 					}
 				});
