@@ -2,9 +2,10 @@
 *.iml
 .classpath
 .project
-.settings
+.settings/
 .checkstyle
 .DS_Store
-target/*
+target/
 MANIFEST.MF
 .gitlab-ci.yml
+*.class
